@@ -8,7 +8,10 @@
 <content *ngIf='!user'>
   <h1 class="warning">数据请求失败 ,<br>请稍后再试 !</h1>
 </content>
-<content *ngIf='user'>
+<content *ngIf='user && !station'>
+  <h1 class="warning">您的权限不足 ,<br>不能使用此项功能 !</h1>
+</content>
+<content *ngIf='user && station'>
   <div class="people">
     <div class="head_img"><img src="{{user.avatar ||'http://liaowang.oss-cn-hangzhou.aliyuncs.com/www/assets/img/news.jpg'}}" alt="placeholderImage"></div>
     <h2>{{user.username}}</h2>

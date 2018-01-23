@@ -33,7 +33,8 @@ export class IndexPage implements OnInit {
   index: any = {
     auditNum: 0,
     themeNum: 0
-  }
+  };
+  station: boolean = true;
   // private broadcaster: Broadcaster,
   constructor(private userService: UserService, private navParams: NavParams, public navCtrl: NavController) {}
   getUser(): void {
@@ -63,6 +64,9 @@ export class IndexPage implements OnInit {
       this.user.avatar = JSON.parse(localStorage.user).avatar;
       this.user.username = JSON.parse(localStorage.user).username;
       this.user.roleName = localStorage.roleName || '瞭望';
+      if (localStorage.status_num == -1) {
+        this.station = false;
+      }
       //this.getTrumpet();
     }
   }
@@ -78,7 +82,7 @@ export class IndexPage implements OnInit {
   userShow(user): void {
     if (user == null) {
       this.user = undefined;
-      alert("请求数据错误或数据库未找到相应数据!");
+      //alert("请求数据错误或数据库未找到相应数据!");
       return;
     }
     this.user.avatar = user.avatar;
@@ -88,6 +92,10 @@ export class IndexPage implements OnInit {
     localStorage.token = user.token;
     localStorage.uid = user.uid;
     this.user.roleNum = user.role.split(',').pop();
+    localStorage.status_num = user.role.search('CMS004');
+    if (localStorage.status_num == -1) {
+      this.station = false;
+    }
     switch (this.user.roleNum) {
       case 'CMS001':
         this.user.roleName = '普通';

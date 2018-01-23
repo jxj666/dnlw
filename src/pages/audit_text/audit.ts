@@ -95,14 +95,14 @@ export class AuditText implements OnInit {
   }
   deleteImg(val): void {
     console.log(val);
-   for(var i=0;i<this.headface.length;i++){
-     if(this.headface[i]==val){
-       console.log(i);
-this.headface.splice(i,1);
-this.imgChange = false;
-return;
-     }
-   }
+    for (var i = 0; i < this.headface.length; i++) {
+      if (this.headface[i] == val) {
+        console.log(i);
+        this.headface.splice(i, 1);
+        this.imgChange = false;
+        return;
+      }
+    }
   }
   addImg(): void {
 
@@ -110,32 +110,17 @@ return;
   audit(K): void {
     const reviewStatus = K;
     var body = `&opinion=${''}&editOpinion=${this.order }&reviewStatus=${reviewStatus }&sourceId=${this.sourceId }&fieldId=${this.fieldId }&title=${this.title1 }&subtitle=${this.title2 }&keyWord=${this.word }&summary=${this.contentMin }&content=${this.onOff2?encodeURIComponent(this.content2):encodeURIComponent(this.content)}&text=${this.onOff2?encodeURIComponent(this.content2):encodeURIComponent(this.content)}&layOutType=${''}&num=${''}&channelArr=${this.channelId.slice(0,-1) }&newsId=${localStorage.auditId }&signUrl=${this.headface.toString()}&isSign=${this.onOff?1:0 }`;
-    // var body = {
-    //   opinion: undefined,
-    //   editOpinion: this.order,
-    //   reviewStatus: reviewStatus,
-    //   sourceId: this.sourceId,
-    //   fieldId: this.fieldId,
-    //   title: this.title1,
-    //   subtitle: this.title2,
-    //   keyword: this.word,
-    //   summary: this.contentMin,
-    //   content: this.content,
-    //   text: this.content,
-    //   layOutType: undefined,
-    //   num: undefined,
-    //   channelArr: this.channelId.slice(0, -1),
-    //   newsId: localStorage.auditId,
-    //   signUrl: undefined,
-    //   isSign: this.onOff ? 1 : 0
-    // }
-    sessionStorage.audited=localStorage.auditId;
+    sessionStorage.audited = localStorage.auditId;
     this.auditService.reviewNews(body).then(data => this.auditShow(data));
   }
-
   auditShow(data): void {
-
-
+    var key = '';
+    if (data.code == 1) {
+      key = '审核成功!'
+    } else {
+      key = '审核失败!'
+    }
+    alert(key)
   }
   onChangeSelectFile(event) {
     this.imgChange = false;
@@ -149,12 +134,12 @@ return;
     //this.headface = localStorage.bookUrl;
 
   }
-showFile(res){
-  console.log(res);
-  var url1=JSON.parse(res).context[0].url ||'http://liaowang.oss-cn-hangzhou.aliyuncs.com/www/assets/img/test.jpg';
-  this.headface.push(url1);
+  showFile(res) {
+    console.log(res);
+    var url1 = JSON.parse(res).context[0].url || 'http://liaowang.oss-cn-hangzhou.aliyuncs.com/www/assets/img/test.jpg';
+    this.headface.push(url1);
 
-}
+  }
   uploadFileShow(data): void {
     alert(data);
   }
