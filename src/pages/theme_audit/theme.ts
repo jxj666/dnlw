@@ -26,7 +26,6 @@ export class ThemeAudit implements OnInit {
   this.field=data.topic.field;
   this.text=data.topic.content.replace(/<.*?>/g,'');
   this.message_list=JSON.parse(data.topic.messageBoard);
-
   }
   save():void{
 localStorage.title=this.title;

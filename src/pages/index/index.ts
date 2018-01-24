@@ -30,6 +30,11 @@ export class IndexPage implements OnInit {
   appSecret: string = 'test';
   msg: string = 'test';
   url: string = '';
+  test: number = 1;
+  request: string = '';
+  response: string = '';
+  mobile: string = '';
+  load: boolean = false;
   index: any = {
     auditNum: 0,
     themeNum: 0
@@ -55,8 +60,9 @@ export class IndexPage implements OnInit {
       }
       localStorage.url = `http://zhikuyun.lwinst.com/`;
       // localStorage.url = `http://testliaowang.chengjuiot.com/`;
-      this.userService.getUser(data).then(user => this.userShow(user));
+      this.userService.getUser(data).then(redata => this.userShow(redata));
     } else {
+      this.load = true;
       if (!localStorage.user) {
         this.user = undefined;
         return;
@@ -79,10 +85,17 @@ export class IndexPage implements OnInit {
   showData(data): void {
     console.log(data);
   }
-  userShow(user): void {
+  addtest(a): void {
+    console.log(this.test);
+    this.test += a;
+    console.log('test');
+  }
+  userShow(redata): void {
+    var user = redata.context;
+    this.response = JSON.stringify(redata);
+    this.load = true;
     if (user == null) {
       this.user = undefined;
-      //alert("请求数据错误或数据库未找到相应数据!");
       return;
     }
     this.user.avatar = user.avatar;
@@ -169,6 +182,8 @@ export class IndexPage implements OnInit {
     this.timestamp = this.navParams.get('timestamp');
     this.appSecret = this.navParams.get('appSecret');
     this.msg = this.navParams.get('msg');
+    this.request = JSON.stringify(this.navParams);
+    this.mobile = JSON.stringify(window.navigator.userAgent);
     sessionStorage.audited = 0;
     this.getUser();
   }

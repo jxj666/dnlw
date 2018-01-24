@@ -26,7 +26,7 @@ export class ThemePublish implements OnInit {
     this.themePublish.dictFields = data.dictFields;
   }
   showData(data): void {
-    console.log(data);
+    if (data.code == 1) { alert('发布成功!') } else { alert('发布失败!') }
   }
   createTopic(): void {
     if (!this.context || !this.title || this.field == '0') {

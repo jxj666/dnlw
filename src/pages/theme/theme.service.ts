@@ -27,14 +27,14 @@ export class ThemeService {
     body +=`&key=${KEY.key}&token=${localStorage.token}`;
     return this.http.post(userUrl, body,{headers: this.headers})
       .toPromise()
-      .then(response => response.json().context as {})
+      .then(response => response.json() as {})
   }
   auditTopic(body): Promise < {} > {
     const userUrl = localStorage.url + `v1/m/topic/auditTopic`;
     body +=`&key=${KEY.key}&token=${localStorage.token}`;
     return this.http.post(userUrl, body,{headers: this.headers})
       .toPromise()
-      .then(response => response.json().code as {})
+      .then(response => response.json() as {})
   }
   info(data): Promise < {} > {
     const userUrl = localStorage.url + `v1/m/topic/info?key=${KEY.key}&token=${localStorage.token}&topicId=${data}`;

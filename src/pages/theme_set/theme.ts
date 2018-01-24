@@ -9,7 +9,7 @@ import { ThemePage } from '../theme/theme';
 })
 export class ThemeSet {
   tab1Root = ThemeAudit;
-   tab2Root = ThemePage;
+  tab2Root = ThemePage;
   opinion: number = 0;
   @Input() text: string = '';
   constructor(private themeService: ThemeService) {}
@@ -18,5 +18,6 @@ export class ThemeSet {
     this.themeService.auditTopic(body).then(data => this.auditTopicShow(data));
   }
   auditTopicShow(data): void {
+    if (data.code == 1) { alert('审核成功!') } else { alert('审核失败!') }
   }
 }

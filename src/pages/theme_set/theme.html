@@ -1,7 +1,7 @@
 <header>
   <div class="title" title="选题">
     <div class="left_icon back_icon" [navPush]=tab1Root></div>
-    <div class="right_icon" (click)='auditTopic()'  [navPush]=tab2Root>确认</div>
+    <div class="right_icon" (click)='auditTopic()' *ngIf='text.trim()' [navPush]=tab2Root>确认</div>
     选题审核
   </div>
 </header>
@@ -14,7 +14,7 @@
     </div>
     <div class="list_c">
       <div class="list_content">
-        <textarea class="textarea content_text" placeholder="必填" [(ngModel)]="text" [style.height.rem]="text.length<100?'3':text.length/50"></textarea>
+        <textarea class="textarea content_text" placeholder="审核意见(必填)" [(ngModel)]="text" [style.height.rem]="text.length<100?'3':text.length/50"></textarea>
       </div>
     </div>
   </div>

@@ -13,7 +13,7 @@ export class UserService {
     const userUrl = localStorage.url + `v1/m/user/index?appid=${data.appid}&appSecret=${data.appSecret}&key=${KEY.key}&sign=${data.sign}&msg=${data.msg}&timestamp=${data.timestamp}`;
     return this.http.get(userUrl)
       .toPromise()
-      .then(response => response.json().context as {})
+      .then(response => response.json() as {})
   }
   getTrumpet(): Promise < {} > {
     const requestData = {

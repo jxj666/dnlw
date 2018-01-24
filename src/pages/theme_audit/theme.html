@@ -10,19 +10,19 @@
     <div class="list_c list_type1">
       <div class="list_title">选题标题</div>
       <div class="list_content">
-        <textarea class="textarea" placeholder="必填" [(ngModel)]="title" [style.height.rem]="title.length<30?'0.45':title.length/30"></textarea>
+        <textarea class="textarea" placeholder="必填" [(ngModel)]="title" [style.height.rem]="title.length<30?'0.45':title.length/30" disabled></textarea>
       </div>
     </div>
     <div class="list_c list_type2">
       <div class="list_title">选题内容</div>
       <div class="list_content">
-        <textarea class="textarea content_text" placeholder="必填" [(ngModel)]="text" [style.height.rem]="text.length<100?'3':text.length/50"></textarea>
+        <textarea class="textarea content_text" placeholder="必填" [(ngModel)]="text" [style.height.rem]="text.length<100?'3':text.length/50" disabled></textarea>
       </div>
     </div>
     <div class="list_c list_type1">
       <div class="list_title">领域</div>
       <div class="list_content">
-        <textarea class="textarea" placeholder="必填" [(ngModel)]="field" [style.height.rem]="field.length<30?'0.45':field.length/30"></textarea>
+        <textarea class="textarea" placeholder="必填" [(ngModel)]="field" [style.height.rem]="field.length<30?'0.45':field.length/30" disabled></textarea>
       </div>
     </div>
     <div class="message">

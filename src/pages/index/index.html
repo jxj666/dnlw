@@ -8,10 +8,24 @@
 <content *ngIf='!user'>
   <h1 class="warning">数据请求失败 ,<br>请稍后再试 !</h1>
 </content>
-<content *ngIf='user && !station'>
+<content *ngIf='!load'>
+  <h1 class="warning">数据加载中 ,<br>请稍后...... </h1>
+</content>
+<content *ngIf='!station'>
   <h1 class="warning">您的权限不足 ,<br>不能使用此项功能 !</h1>
 </content>
-<content *ngIf='user && station'>
+<content class="test">
+  <div (click)='addtest(1)'>
+  </div>
+</content>
+<content class="info" *ngIf='test>7'>
+  <p>版本:1.24</p>
+  <p>{{request}}</p>
+  <p>{{response}}</p>
+  <p>{{mobile}}</p>
+  <p>{{station}}{{load}}</p>
+</content>
+<content *ngIf='user && station && load'>
   <div class="people">
     <div class="head_img"><img src="{{user.avatar ||'http://liaowang.oss-cn-hangzhou.aliyuncs.com/www/assets/img/news.jpg'}}" alt="placeholderImage"></div>
     <h2>{{user.username}}</h2>
