@@ -21,6 +21,8 @@ export class AuditPage implements OnInit {
   ngOnInit(): void {
     this.audited= sessionStorage.audited || '0';
     this.getReviewNews();
+    var that=this;
+    setTimeout(function(){that.getReviewNews()},1000);
   }
   getReviewNews(): void {
     this.auditService.getReviewNews1().then(data => this.getReviewNewsShow(data));

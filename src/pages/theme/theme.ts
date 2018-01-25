@@ -25,6 +25,8 @@ export class ThemePage implements OnInit {
   constructor(private themeService: ThemeService,  public navCtrl: NavController) {}
   ngOnInit(): void {
     this.getAllTopics();
+        var that=this;
+    setTimeout(function(){that.getAllTopics()},1000);
   }
   pushParams(): void {
     this.navCtrl.push(IndexPage, { 'appid': this.appid, 'sign': this.sign, 'timestamp': this.timestamp, 'appSecret': this.appSecret, 'msg': this.msg });
