@@ -1,5 +1,5 @@
 <header>
-  <div class="title" title="瞭望管理系统">
+  <div class="title" title="瞭望管理系统" (click)='addtest(1)'>
     <!-- <div class="left_icon back_icon"></div> -->
     <!-- <div class="right_icon"></div> -->
     采编发系统
@@ -14,16 +14,17 @@
 <content *ngIf='!station'>
   <h1 class="warning">您的权限不足 ,<br>不能使用此项功能 !</h1>
 </content>
-<content class="test">
-  <div (click)='addtest(1)'>
-  </div>
-</content>
-<content class="info" *ngIf='test>7'>
-  <p>版本:1.24</p>
-  <p>{{request}}</p>
-  <p>{{response}}</p>
-  <p>{{mobile}}</p>
-  <p>{{station}}{{load}}</p>
+<content class="info" *ngIf='test>10' (click)='test=0'>
+  <ol>
+    <li>版本:1.25</li>
+    <li>请求: {{request}}</li>
+    <li>返回: {{response}}</li>
+    <li>状态: {{station}}</li>
+    <li>加载: {{load}}</li>
+    <li>错误: {{error}}</li>
+    <li>设备: {{mobile}}</li>
+    <li>本机: {{local}}</li>
+  </ol>
 </content>
 <content *ngIf='user && station && load'>
   <div class="people">

@@ -9,11 +9,12 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class UserService {
   constructor(private http: Http) {}
-  getUser(data): Promise < {} > {
+  getUser(data): Promise < any > {
     const userUrl = localStorage.url + `v1/m/user/index?appid=${data.appid}&appSecret=${data.appSecret}&key=${KEY.key}&sign=${data.sign}&msg=${data.msg}&timestamp=${data.timestamp}`;
     return this.http.get(userUrl)
       .toPromise()
-      .then(response => response.json() as {})
+      .then(response => response)
+      .catch(this.handleError)
   }
   getTrumpet(): Promise < {} > {
     const requestData = {
@@ -25,5 +26,9 @@ export class UserService {
     return this.http.get(userUrl)
       .toPromise()
       .then(response => response.json().context as {})
+  }
+  private handleError(error: any): void{
+    console.error('An error', error);
+    localStorage.error = JSON.stringify(error);
   }
 }

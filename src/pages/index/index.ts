@@ -34,7 +34,9 @@ export class IndexPage implements OnInit {
   request: string = '';
   response: string = '';
   mobile: string = '';
+  local: string = '';
   load: boolean = false;
+  error:string='';
   index: any = {
     auditNum: 0,
     themeNum: 0
@@ -58,7 +60,7 @@ export class IndexPage implements OnInit {
         appSecret: this.appSecret,
         msg: encodeURIComponent(this.msg)
       }
-      localStorage.url = `http://zhikuyun.lwinst.com/`;
+      localStorage.url = `http://zkcms.lwinst.com/`;
       // localStorage.url = `http://testliaowang.chengjuiot.com/`;
       this.userService.getUser(data).then(redata => this.userShow(redata));
     } else {
@@ -91,9 +93,14 @@ export class IndexPage implements OnInit {
     console.log('test');
   }
   userShow(redata): void {
-    var user = redata.context;
-    this.response = JSON.stringify(redata);
     this.load = true;
+    this.response = JSON.stringify(redata);
+    if (!redata) {
+      this.user=undefined;
+      this.error=localStorage.error;
+      return;
+    }
+    var user = JSON.parse(redata._body).context;
     if (user == null) {
       this.user = undefined;
       return;
@@ -184,6 +191,7 @@ export class IndexPage implements OnInit {
     this.msg = this.navParams.get('msg');
     this.request = JSON.stringify(this.navParams);
     this.mobile = JSON.stringify(window.navigator.userAgent);
+    this.local = JSON.stringify(window.location);
     sessionStorage.audited = 0;
     this.getUser();
   }
