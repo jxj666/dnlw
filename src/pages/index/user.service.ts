@@ -10,8 +10,8 @@ import 'rxjs/add/operator/toPromise';
 export class UserService {
   constructor(private http: Http) {}
   getUser(data): Promise < any > {
-    // const userUrl = localStorage.url + `v1/m/user/index?appid=${data.appid}&appSecret=${data.appSecret}&key=${KEY.key}&sign=${data.sign}&msg=${data.msg}&timestamp=${data.timestamp}`;
-    const userUrl=`https://easy-mock.com/mock/5a6ea0577af44c1f4d779871/v1/m/user/index`;
+    const userUrl = localStorage.url + `v1/m/user/index?appid=${data.appid}&appSecret=${data.appSecret}&key=${KEY.key}&sign=${data.sign}&msg=${data.msg}&timestamp=${data.timestamp}`;
+    // const userUrl=`https://easy-mock.com/mock/5a6ea0577af44c1f4d779871/v1/m/user/index`;
     return this.http.get(userUrl)
       .toPromise()
       .then(response => response)
