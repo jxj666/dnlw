@@ -5,28 +5,24 @@
     采编发系统
   </div>
 </header>
-<content *ngIf='!user'>
-  <h1 class="warning">数据请求失败 ,<br>请稍后再试 !</h1>
+<content *ngIf='!station ||!load ||!http'>
+  <h1 class="warning" *ngIf='!http'>数据请求失败 ,<br>请稍后再试 !</h1>
+  <h1 class="warning" *ngIf='!load'>数据加载中 ,<br>请稍后...... </h1>
+  <h1 class="warning" *ngIf='!station'>您的权限不足 ,<br>不能使用此项功能 !</h1>
+  <div class="info" *ngIf='test>10' (click)='test=0'>
+    <ol>
+      <li>版本:1.29</li>
+      <li>请求: {{request}}</li>
+      <li>返回: {{response}}</li>
+      <li>状态: {{station}}</li>
+      <li>加载: {{load}}</li>
+      <li>错误: {{error}}</li>
+      <li>设备: {{mobile}}</li>
+      <li>本机: {{local}}</li>
+    </ol>
+  </div>
 </content>
-<content *ngIf='!load'>
-  <h1 class="warning">数据加载中 ,<br>请稍后...... </h1>
-</content>
-<content *ngIf='!station'>
-  <h1 class="warning">您的权限不足 ,<br>不能使用此项功能 !</h1>
-</content>
-<content class="info" *ngIf='test>10' (click)='test=0'>
-  <ol>
-    <li>版本:1.25</li>
-    <li>请求: {{request}}</li>
-    <li>返回: {{response}}</li>
-    <li>状态: {{station}}</li>
-    <li>加载: {{load}}</li>
-    <li>错误: {{error}}</li>
-    <li>设备: {{mobile}}</li>
-    <li>本机: {{local}}</li>
-  </ol>
-</content>
-<content *ngIf='user && station && load'>
+<content *ngIf='http && station && load'>
   <div class="people">
     <div class="head_img"><img src="{{user.avatar ||'http://liaowang.oss-cn-hangzhou.aliyuncs.com/www/assets/img/news.jpg'}}" alt="placeholderImage"></div>
     <h2>{{user.username}}</h2>
@@ -43,6 +39,7 @@
     </div>
   </div>
 </content>
+<!-- <button class="test1" (click)='pushParams()'>发送模拟数据</button> -->
 <!-- <button class="test1"  (click)='listen()'>接受</button> -->
 <!-- <button class="test2" (click)='send()'>发送</button> -->
 <!-- <button class="test1" [navPush]="tab2Root">取值</button> -->

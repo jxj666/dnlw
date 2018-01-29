@@ -16,20 +16,16 @@ export class ThemePage implements OnInit {
   tab2Root = ThemePublish;
   tab3Root = ThemeAudit;
   theme_list: any = [];
-  appid: string = '12sadfasfcsfdadsfdsf3';
-  timestamp: string = '1232342134124';
-  appSecret: string = 'wqerweqrwqerqwer';
-  sign: string = '13214321fdfdsa234fwefdafds';
-  msg: string = '43123213234321sfaasdf421342342134werwqer2143214';
 
-  constructor(private themeService: ThemeService,  public navCtrl: NavController) {}
+
+  constructor(private themeService: ThemeService, public navCtrl: NavController) {}
   ngOnInit(): void {
     this.getAllTopics();
-        var that=this;
-    setTimeout(function(){that.getAllTopics()},1000);
+    var that = this;
+    setTimeout(function() { that.getAllTopics() }, 1000);
   }
   pushParams(): void {
-    this.navCtrl.push(IndexPage, { 'appid': this.appid, 'sign': this.sign, 'timestamp': this.timestamp, 'appSecret': this.appSecret, 'msg': this.msg });
+    this.navCtrl.push(IndexPage, { 'appid': 11, 'sign': 22, 'timestamp': 33, 'appSecret': 44, 'msg': 55 });
   }
   getAllTopics(): void {
     this.themeService.getAllTopics().then(data => this.getMyPublishTopicsShow(data));
@@ -43,8 +39,7 @@ export class ThemePage implements OnInit {
   saveId(data): void {
     localStorage.themeId = data;
   }
-    goToMyPage() {
-    // go to the MyPage component
+  goToMyPage(): void {
     this.navCtrl.push('IndexPage');
   }
 }

@@ -35,13 +35,16 @@ export class IndexPage implements OnInit {
   response: string = '';
   mobile: string = '';
   local: string = '';
-  load: boolean = false;
-  error:string='';
+  error: string = '';
   index: any = {
     auditNum: 0,
     themeNum: 0
   };
+
+  http: boolean = true;
+  load: boolean = true;
   station: boolean = true;
+
   // private broadcaster: Broadcaster,
   constructor(private userService: UserService, private navParams: NavParams, public navCtrl: NavController) {}
   getUser(): void {
@@ -66,7 +69,7 @@ export class IndexPage implements OnInit {
     } else {
       this.load = true;
       if (!localStorage.user) {
-        this.user = undefined;
+        this.http = false;
         return;
       }
       this.user.avatar = JSON.parse(localStorage.user).avatar;
@@ -84,25 +87,20 @@ export class IndexPage implements OnInit {
   getTrumpetShow(data): void {
     this.index.auditNum = data.news;
   }
-  showData(data): void {
-    console.log(data);
-  }
   addtest(a): void {
-    console.log(this.test);
-    this.test += a;
-    console.log('test');
+    this.test += Number(a);
   }
   userShow(redata): void {
     this.load = true;
     this.response = JSON.stringify(redata);
     if (!redata) {
-      this.user=undefined;
-      this.error=localStorage.error;
+      this.http = false;
+      this.error = localStorage.error;
       return;
     }
     var user = JSON.parse(redata._body).context;
     if (user == null) {
-      this.user = undefined;
+      this.http = false;
       return;
     }
     this.user.avatar = user.avatar;
@@ -183,7 +181,11 @@ export class IndexPage implements OnInit {
     localStorage.roleName = this.user.roleName;
     // this.getTrumpet();
   }
+  pushParams(): void {
+    this.navCtrl.push(IndexPage, { 'appid': 11, 'sign': 22, 'timestamp': 33, 'appSecret': 44, 'msg': 55 });
+  }
   ngOnInit(): void {
+    this.load = false;
     this.appid = this.navParams.get('appid');
     this.sign = this.navParams.get('sign');
     this.timestamp = this.navParams.get('timestamp');

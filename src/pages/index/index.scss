@@ -112,10 +112,15 @@ page-index {
   width: 100%;
   background: red;
   background: #fff;
-  height: 5rem;
-  overflow:auto;
-  li{
-    font-size: 0.2rem;
-    padding:0.2rem;
+  max-height: 10rem;
+  overflow: auto;
+  border-radius: 0.5rem;
+  ol {
+    margin: 0.2rem;
+    padding: 0.2rem;
+    li {
+      font-size: 0.2rem;
+      padding: 0.2rem;
+    }
   }
 }
