@@ -8,7 +8,7 @@ body {
 }
 
 .hide {
-  display: none;
+  display: none!important;
 }
 
 .content,
@@ -49,7 +49,7 @@ body {
     background-size: auto 0.36rem;
     line-height: 0.9rem;
     font-size: 0.28rem;
-    color:#878998;
+    color: #878998;
   }
 }
 
