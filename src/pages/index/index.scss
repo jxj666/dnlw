@@ -31,7 +31,8 @@ page-index {
         margin: 0 auto;
         overflow: hidden;
         border-radius: 50%;
-        background:#3b83ee;
+        background: rgba(0, 0, 250, 0.1) url('../assets/img/people.jpg') no-repeat center center;
+        background-size: cover;
       }
     }
     h2 {
@@ -116,6 +117,7 @@ page-index {
   max-height: 8rem;
   overflow: auto;
   border-radius: 0.5rem;
+  z-index: 100;
   ol {
     margin: 0.2rem;
     padding: 0.2rem;

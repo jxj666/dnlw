@@ -99,6 +99,7 @@ export class IndexPage implements OnInit {
       return;
     }
     var user = JSON.parse(redata._body).context;
+    var did_obj={ 'ZKS': '周刊社', 'LWZK': '瞭望智库', 'HQZZ': '环球杂志', 'DFZK': '东方周刊', 'CJGJZK': '财经国家周刊' };
     if (user == null) {
       this.http = false;
       return;
@@ -109,76 +110,13 @@ export class IndexPage implements OnInit {
     localStorage.role = user.role;
     localStorage.token = user.token;
     localStorage.uid = user.uid;
-    this.user.roleNum = user.role.split(',').pop();
+    this.user.roleName = did_obj[user.did];
     localStorage.status_num = user.role.search('CMS004');
     if (localStorage.status_num == -1) {
       this.station = false;
     }
-    switch (this.user.roleNum) {
-      case 'CMS001':
-        this.user.roleName = '普通';
-        break;
-      case 'CMS002':
-        this.user.roleName = '一编';
-        break;
-      case 'CMS003':
-        this.user.roleName = '二编';
-        break;
-      case 'CMS004':
-        this.user.roleName = '签发';
-        break;
-      case 'CMS005':
-        this.user.roleName = '设计部';
-        break;
-      case 'CMS006':
-        this.user.roleName = '总编室1';
-        break;
-      case 'CMS007':
-        this.user.roleName = '总编室2';
-        break;
-      case 'CMS008':
-        this.user.roleName = '选题浏览';
-        break;
-      case 'CMS009':
-        this.user.roleName = '选题编辑';
-        break;
-      case 'CMS010':
-        this.user.roleName = '高级选填编辑';
-        break;
-      case 'CMS011':
-        this.user.roleName = '外部人员选题查看';
-        break;
-      case 'CMS012':
-        this.user.roleName = '终审';
-        break;
-      case 'CMS013':
-        this.user.roleName = '研报普通';
-        break;
-      case 'CMS014':
-        this.user.roleName = '研报一编';
-        break;
-      case 'CMS015':
-        this.user.roleName = '研报二编';
-        break;
-      case 'CMS016':
-        this.user.roleName = '研报签发';
-        break;
-      case 'CMS017':
-        this.user.roleName = '研报导出';
-        break;
-      case 'CMS018':
-        this.user.roleName = '研报总编室1';
-        break;
-      case 'CMS019':
-        this.user.roleName = '研报总编室2';
-        break;
-      case 'CMS020':
-        this.user.roleName = '高级';
-        break;
-      default:
-        this.user.roleName = '未知';
-    }
     localStorage.roleName = this.user.roleName;
+    this.navCtrl.push(IndexPage);
     // this.getTrumpet();
   }
   pushParams(): void {

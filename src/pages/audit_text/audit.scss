@@ -46,9 +46,9 @@ page-audit-text {
             border-radius: 0.05rem;
             font-size: 0.24rem;
           }
-          .list_active{
-                      border: 1px solid #3b83ee;
-          color: #3b83ee;
+          .list_active {
+            border: 1px solid #3b83ee;
+            color: #3b83ee;
           }
           .list_h1 {
             line-height: 0.3rem;
@@ -210,5 +210,99 @@ page-audit-text {
         }
       }
     }
+  }
+}
+
+#true_content {
+  position: relative;
+  overflow: hidden;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-size: 0.4rem!important;
+    line-height: 0.3rem!important;
+    margin: 0!important;
+    padding: 0!important;
+  }
+  img {
+    max-width: 100%!important;
+    margin: 0!important;
+    padding:0!important;
+  }
+  video,
+  audio {
+    display: none!important;
+  }
+  div,
+  dl,
+  dt,
+  dd,
+  ul,
+  ol,
+  li,
+  p,
+  span,
+  blockquote,
+
+  hr,
+  figure,
+  table,
+  caption,
+  th,
+  td,
+  form,
+  fieldset,
+  legend,
+  input,
+  button,
+  textarea,
+  menu,
+  header,
+  footer,
+  section,
+  article,
+  aside,
+  nav,
+  hgroup,
+  address,
+
+  figcaption,
+  details,
+
+  th,
+
+  iframe,
+  abbr,
+  i,
+  cite,
+  em,
+  var,
+
+  dfn,
+  [hidefocus],
+  summary,
+  sup,
+  sub,
+  pre,
+  code,
+  kbd,
+  samp,
+
+  label,
+  a,
+
+
+  input,
+
+  select,
+  keygen,
+  legend {
+    line-height: 0.35rem!important;
+    font-size: 0.25rem!important;
+    margin: 0!important;
+    padding: 0!important;
   }
 }

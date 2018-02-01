@@ -66,7 +66,11 @@
       <div class="list_title">内容</div>
       <div class="list_content">
         <div class="switch"><span [class]="onOff2?'explain':'unexplain'">{{onOff2?'注意:修改会造成文档样式缺失':'仅浏览'}}</span><span [class]="onOff2?'on_off on':'on_off off'" (click)='onOff2=!onOff2'></span></div>
-        <textarea [disabled]="onOff2?flase:true" class="textarea" placeholder="必填" [(ngModel)]="content2" [style.height.rem]="content2.length<90?'2.7':content2.length/55"></textarea>
+        <div id="true_content" [class.hide]="onOff2" class="textarea">
+
+        </div>
+        <textarea  [class.hide]="!onOff2" class="textarea" placeholder="必填" [(ngModel)]="content2" [style.height.rem]="content2.length<90?'2.7':content2.length/55"></textarea>
+
         <!--  <div class="textarea">{{content2}}</div> -->
       </div>
     </div>

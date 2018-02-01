@@ -24,6 +24,7 @@ export class AuditText implements OnInit {
   @Input() contentMin: string = '';
   @Input() content: string = '';
   @Input() order: string = '';
+  @Input() content2: any = '';
   channelarr: any = [];
   channelId: any = '';
   fieldId: any = '';
@@ -36,7 +37,7 @@ export class AuditText implements OnInit {
   onOff2: boolean = false;
   imgUrl: string = '';
   options: any = {};
-  content2: any = '';
+
   headface: any = [];
   imgChange: boolean = false;
 
@@ -65,6 +66,7 @@ export class AuditText implements OnInit {
     this.job = data.news.position || ' ';
     this.contentMin = data.news.summary || ' ';
     this.content = data.news.content || ' ';
+    document.getElementById('true_content').innerHTML=this.content;
     this.content2 = data.news.content.replace(/&nbsp;/ig, ' ').replace(/<\/em>/ig, '').replace(/<\/>/ig, '').replace(/<\/b>/ig, '').replace(/<[bi(em)]>/ig, '').replace(/<\/.*?>/ig, '\r').replace(/<.*?>/ig, ' ');
     this.opinion_list = data.newsReviews || [];
     this.sourceId = data.newsSource.sourceId;

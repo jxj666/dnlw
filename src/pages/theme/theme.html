@@ -14,7 +14,7 @@
     <div class="list" *ngFor='let x of theme_list' [navPush]="tab3Root" (click)='saveId(x.topic.id)'>
       <div class="list_h">{{x.topic.title || '未填写'}}</div>
       <div class="list_b">
-        <span class="info1">{{x.publish.username}}</span><span class="info2">{{x.topic.createTime| date:"yyyy-MM-dd HH:ss"}}</span>
+        <span class="info1">{{x.publish?x.publish.username:'佚名'}}</span><span class="info2">{{x.topic.createTime| date:"yyyy-MM-dd HH:ss"}}</span>
       </div>
     </div>
   </div>

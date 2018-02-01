@@ -13,7 +13,7 @@
         </div>
       </div>
       <div class="list_b">
-        <span class="info1">【一审】{{i.newsReviews[0]?i.newsReviews[0].user.username:"未审核"}} 【二审】{{i.newsReviews[i.newsReviews.length-1]?i.newsReviews[i.newsReviews.length-1].user.username:'未审核'}}</span><span class="info2">{{i.news.createTime|date:"yyyy-MM-dd HH:ss"}}</span>
+        <span class="info1">【一审】{{i.newsReviews[0]?(i.newsReviews[0].user?i.newsReviews[0].user.username:'未记录'):"未记录"}} 【二审】{{i.newsReviews[i.newsReviews.length-1]?(i.newsReviews[i.newsReviews.length-1].user?i.newsReviews[i.newsReviews.length-1].user.username:'未记录'):"未记录"}} </span><span class="info2">{{i.news.createTime|date:"yyyy-MM-dd HH:ss"}}</span>
         <div class='author'>{{i.news.author}}</div>
         <div class="clear"></div>
       </div>
