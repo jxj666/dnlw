@@ -74,7 +74,7 @@ export class IndexPage implements OnInit {
       }
       this.user.avatar = JSON.parse(localStorage.user).avatar;
       this.user.username = JSON.parse(localStorage.user).username;
-      this.user.roleName = localStorage.roleName || '瞭望';
+      this.user.roleName = localStorage.roleName || '新华社';
       if (localStorage.status_num == -1) {
         this.station = false;
       }
@@ -110,7 +110,7 @@ export class IndexPage implements OnInit {
     localStorage.role = user.role;
     localStorage.token = user.token;
     localStorage.uid = user.uid;
-    this.user.roleName = did_obj[user.did];
+    this.user.roleName = did_obj[user.did] || "新华社";
     localStorage.status_num = user.role.search('CMS004');
     if (localStorage.status_num == -1) {
       this.station = false;
