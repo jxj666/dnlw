@@ -63,8 +63,8 @@ export class IndexPage implements OnInit {
         appSecret: this.appSecret,
         msg: encodeURIComponent(this.msg)
       }
-      localStorage.url = `http://zkcms.lwinst.com/`;
-      // localStorage.url = `http://testliaowang.chengjuiot.com/`;
+      // localStorage.url = `http://zkcms.lwinst.com/`;
+      localStorage.url = `http://testliaowang.chengjuiot.com/`;
       this.userService.getUser(data).then(redata => this.userShow(redata));
     } else {
       this.load = true;
@@ -78,12 +78,34 @@ export class IndexPage implements OnInit {
       if (localStorage.status_num == -1) {
         this.station = false;
       }
-      //this.getTrumpet();
+      var did = localStorage.did.split(',');
+      console.log(did);
+      if (did.length > 1) {
+        this.getUserDepartment();
+      }
     }
   }
+  //获取通知
   getTrumpet(): void {
     this.userService.getTrumpet().then(data => this.getTrumpetShow(data));
   }
+  //获取用户部门
+  getUserDepartment(): void {
+    this.userService.getUserDepartment().then(data => this.getUserDepartmentShow(data));
+  }
+  //设置用户部门
+  changeDepartment(): void {
+    this.userService.changeDepartment().then(data => this.changeDepartmentShow(data));
+  }
+  //获取用户部门响应
+  getUserDepartmentShow(data): void {
+
+  }
+  //获取通知显示响应
+  changeDepartmentShow(data): void {
+
+  }
+  //获取通知显示
   getTrumpetShow(data): void {
     this.index.auditNum = data.news;
   }
@@ -99,7 +121,7 @@ export class IndexPage implements OnInit {
       return;
     }
     var user = JSON.parse(redata._body).context;
-    var did_obj={ 'ZKS': '周刊社', 'LWZK': '瞭望智库', 'HQZZ': '环球杂志', 'DFZK': '东方周刊', 'CJGJZK': '财经国家周刊' };
+    var did_obj = { 'ZKS': '周刊社', 'LWZK': '瞭望智库', 'HQZZ': '环球杂志', 'DFZK': '东方周刊', 'CJGJZK': '财经国家周刊' };
     if (user == null) {
       this.http = false;
       return;
@@ -108,6 +130,8 @@ export class IndexPage implements OnInit {
     this.user.username = user.username;
     localStorage.user = JSON.stringify(user);
     localStorage.role = user.role;
+    localStorage.uid = user.uid;
+    localStorage.did = user.did || '';
     localStorage.token = user.token;
     localStorage.uid = user.uid;
     this.user.roleName = did_obj[user.did] || "新华社";
@@ -117,7 +141,10 @@ export class IndexPage implements OnInit {
     }
     localStorage.roleName = this.user.roleName;
     this.navCtrl.push(IndexPage);
-    // this.getTrumpet();
+    var did = localStorage.did.split();
+    if (did.length > 2) {
+      this.getUserDepartment();
+    }
   }
   pushParams(): void {
     this.navCtrl.push(IndexPage, { 'appid': 11, 'sign': 22, 'timestamp': 33, 'appSecret': 44, 'msg': 55 });
