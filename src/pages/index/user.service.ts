@@ -39,6 +39,17 @@ export class UserService {
       .toPromise()
       .then(response => response.json().context as {})
   }
+  changeDepartment(): Promise < {} > {
+    const requestData = {
+      token: localStorage.token,
+      uid: localStorage.uid
+    }
+    const userUrl = localStorage.url + `v1/m/user/changeDepartment?uid=${requestData.uid}&token=${requestData.token}`;
+
+    return this.http.get(userUrl)
+      .toPromise()
+      .then(response => response.json().context as {})
+  }
   private handleError(error: any): void {
     console.error('An error', error);
     localStorage.error = JSON.stringify(error);
