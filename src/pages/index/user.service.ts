@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http,Headers } from '@angular/http';
 import { KEY } from '../../app/key'
 
 import 'rxjs/add/operator/toPromise';
@@ -8,6 +8,7 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class UserService {
+   private headers = new Headers({'Content-Type': 'application/x-www-form-urlencoded'});
   constructor(private http: Http) {}
   getUser(data): Promise < any > {
     const userUrl = localStorage.url + `v1/m/user/index?appid=${data.appid}&appSecret=${data.appSecret}&key=${KEY.key}&sign=${data.sign}&msg=${data.msg}&timestamp=${data.timestamp}`;
@@ -29,26 +30,18 @@ export class UserService {
       .then(response => response.json().context as {})
   }
   getUserDepartment(): Promise < {} > {
-    const requestData = {
-      token: localStorage.token,
-      uid: localStorage.uid
-    }
-    const userUrl = localStorage.url + `v1/m/user/getUserDepartment?uid=${requestData.uid}&token=${requestData.token}`;
+    const userUrl = localStorage.url + `v1/m/user/getUserDepartment?uid=${localStorage.uid}&token=${localStorage.token}`;
 
     return this.http.get(userUrl)
       .toPromise()
       .then(response => response.json().context as {})
   }
   changeDepartment(): Promise < {} > {
-    const requestData = {
-      token: localStorage.token,
-      uid: localStorage.uid
-    }
-    const userUrl = localStorage.url + `v1/m/user/changeDepartment?uid=${requestData.uid}&token=${requestData.token}`;
-
-    return this.http.get(userUrl)
+    const userUrl = localStorage.url + `v1/m/user/changeDepartment`;
+    const body=`uid=${localStorage.uid}&token=${localStorage.token}&did=${localStorage.did_ready}`;
+    return this.http.post(userUrl, body,{headers: this.headers})
       .toPromise()
-      .then(response => response.json().context as {})
+      .then(response => response.json() as {})
   }
   private handleError(error: any): void {
     console.error('An error', error);

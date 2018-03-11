@@ -40,7 +40,15 @@ export class IndexPage implements OnInit {
     auditNum: 0,
     themeNum: 0
   };
-
+  depart: any = {
+    'ZKS': '周刊社',
+    'LWZK': '瞭望智库',
+    'HQZZ': '环球杂志',
+    'DFZK': '东方周刊',
+    'CJGJZK': '财经国家周刊'
+  };
+  userDepart: any = [];
+  departChange: boolean = false;
   http: boolean = true;
   load: boolean = true;
   station: boolean = true;
@@ -63,8 +71,8 @@ export class IndexPage implements OnInit {
         appSecret: this.appSecret,
         msg: encodeURIComponent(this.msg)
       }
-      // localStorage.url = `http://zkcms.lwinst.com/`;
-      localStorage.url = `http://testliaowang.chengjuiot.com/`;
+      localStorage.url = `http://zkcms.lwinst.com/`;
+      // localStorage.url = `http://testliaowang.chengjuiot.com/`;
       this.userService.getUser(data).then(redata => this.userShow(redata));
     } else {
       this.load = true;
@@ -78,9 +86,7 @@ export class IndexPage implements OnInit {
       if (localStorage.status_num == -1) {
         this.station = false;
       }
-      var did = localStorage.did.split(',');
-      console.log(did);
-      if (did.length > 1) {
+      if (localStorage.did && localStorage.did.split(',').length > 1) {
         this.getUserDepartment();
       }
     }
@@ -91,19 +97,27 @@ export class IndexPage implements OnInit {
   }
   //获取用户部门
   getUserDepartment(): void {
+    this.userDepart = localStorage.did.split(',');
     this.userService.getUserDepartment().then(data => this.getUserDepartmentShow(data));
   }
   //设置用户部门
-  changeDepartment(): void {
+  changeDepartment(depart): void {
+    localStorage.did_ready = depart;
+    this.departChange = false;
     this.userService.changeDepartment().then(data => this.changeDepartmentShow(data));
   }
   //获取用户部门响应
   getUserDepartmentShow(data): void {
-
+    this.user.roleName = this.depart[data.did];
   }
   //获取通知显示响应
   changeDepartmentShow(data): void {
-
+    if (data.code == 1 && data.msg == 'success') {
+      this.user.roleName = this.depart[localStorage.did_ready];
+      localStorage.roleName = this.user.roleName;
+    } else {
+      alert('切换失败!');
+    }
   }
   //获取通知显示
   getTrumpetShow(data): void {
@@ -121,7 +135,6 @@ export class IndexPage implements OnInit {
       return;
     }
     var user = JSON.parse(redata._body).context;
-    var did_obj = { 'ZKS': '周刊社', 'LWZK': '瞭望智库', 'HQZZ': '环球杂志', 'DFZK': '东方周刊', 'CJGJZK': '财经国家周刊' };
     if (user == null) {
       this.http = false;
       return;
@@ -134,15 +147,14 @@ export class IndexPage implements OnInit {
     localStorage.did = user.did || '';
     localStorage.token = user.token;
     localStorage.uid = user.uid;
-    this.user.roleName = did_obj[user.did] || "新华社";
+    this.user.roleName = this.depart[user.did] || "新华社";
     localStorage.status_num = user.role.search('CMS004');
     if (localStorage.status_num == -1) {
       this.station = false;
     }
     localStorage.roleName = this.user.roleName;
     this.navCtrl.push(IndexPage);
-    var did = localStorage.did.split();
-    if (did.length > 2) {
+    if (localStorage.did && localStorage.did.split(',').length > 2) {
       this.getUserDepartment();
     }
   }

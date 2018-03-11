@@ -28,6 +28,9 @@
     <div class="head_img"><img src="{{user.avatar}}" alt=""></div>
     <h2>{{user.username}}</h2>
     <h3>{{user.roleName}}</h3>
+    <h4 [class.hide]="userDepart.length<2">
+    <span (click)='departChange=!departChange'>切换权限</span>
+    </h4>
   </div>
   <div class="btns">
     <div class="btn btn1" [navPush]="tab2Root">
@@ -38,6 +41,11 @@
       <!-- <span *ngIf='index.themeNum'>{{index.themeNum}}</span> -->
       <div class="btn_title">选题管理</div>
     </div>
+  </div>
+  <div class="departChange" [class.hide]="!departChange">
+    <ul>
+      <li *ngFor='let x of userDepart' (click)='changeDepartment(x)'>{{depart[x]}} </li>
+    </ul>
   </div>
 </content>
 <!-- <button class="test1" (click)='pushParams()'>发送模拟数据</button> -->
